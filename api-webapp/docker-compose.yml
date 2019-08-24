@@ -1,0 +1,50 @@
+---
+version: "3.7"
+
+services:
+  mongo:
+    build: "${PATH_TO_MONGO_FOLDER}"
+    container_name: mongo
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: database
+    volumes:
+      - "${PATH_TO_MONGO_FOLDER}/data/db:/data/db"
+  api:
+    build: "${PATH_TO_API_FOLDER}"
+    container_name: api
+    expose:
+      - 27017
+    ports:
+      - 4000:4000
+      - 49541:49541 #For debugging
+    environment:
+      NODE_ENV: development
+      WAIT_HOSTS: mongo:27017
+    volumes:
+      - "${PATH_TO_API_FOLDER}:/usr/src/app"
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+    entrypoint:
+      - "/bin/sh"
+      - -ecx
+      - |
+        /wait && npm run dev
+  webapp:
+    build: "${PATH_TO_WEBAPP_FOLDER}"
+    container_name: webapp
+    ports:
+      - 3000:3000
+    environment:
+      WAIT_HOSTS: api:4000
+    volumes:
+      - "${PATH_TO_WEBAPP_FOLDER}:/usr/src/app"
+      - /usr/src/app/node_modules
+    depends_on:
+      - api
