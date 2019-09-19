@@ -1,0 +1,18 @@
+---
+
+#ssh
+ansible_ssh_port: 22
+ansible_user: ''
+ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
+
+#env
+react_app_graphql_server_url: https://test-api.tlprt.io/graphql
+react_app_agora_app_id: 7dea5406fe56495c95e5f9fe17c6fbbb
+react_app_conversation_socket_url: https://test-api.tlprt.io/conversation
+react_app_status_socket_url: https://test-api.tlprt.io/status
+react_app_socket_url: https://test-api.tlprt.io
+react_app_opentok_api_key: 46415522
+react_app_voice_platform: tokbox
+
+#docker
+docker_image: eu.gcr.io/teleport-platform/webapp
