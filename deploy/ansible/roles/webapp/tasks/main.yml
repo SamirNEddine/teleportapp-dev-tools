@@ -8,16 +8,15 @@
 - name: Copy the env file
   template: src=env.j2 dest={{ config_directory_path }}/env.ini
 
-- name: Run api
+- name: Run webapp
   become: true
   docker_container:
-    name: api
+    name: webapp
     image: "{{ docker_image }}"
     state: started
     recreate: yes
     restart_policy: on-failure
     pull: yes
-    volumes:
-      - "{{ config_directory_path }}/env.ini:{{ main_app_directory_path }}/.env"
     ports:
-      - 4000:4000
+      - 3000:80
+#      command: ./usr/share/nginx/html/env.sh && nginx -s quit && nginx -g "daemon off;"

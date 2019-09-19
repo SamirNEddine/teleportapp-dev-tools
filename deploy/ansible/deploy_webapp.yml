@@ -1,0 +1,11 @@
+---
+
+#Deploy
+- name: Deploy webapp
+  hosts: "webapp_test"
+  gather_facts: True
+  roles:
+    - role: common
+      become: true
+    - role: webapp
+      become: true
