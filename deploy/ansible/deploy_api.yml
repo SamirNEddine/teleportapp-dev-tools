@@ -1,0 +1,11 @@
+---
+
+#Deploy
+- name: Deploy API
+  hosts: "api_test"
+  gather_facts: True
+  roles:
+    - role: common
+      become: true
+    - role: api
+      become: true

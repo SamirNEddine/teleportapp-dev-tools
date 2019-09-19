@@ -1,0 +1,8 @@
+plugin: gcp_compute
+projects:
+  - teleport-platform
+auth_kind: serviceaccount
+keyed_groups:
+  - key: labels['host_group']
+    separator: ''
+service_account_file: /Users/samir/Developer/Google/serviceAccounts/teleport-platform-b8120ad06a5f.json
