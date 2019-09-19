@@ -1,0 +1,23 @@
+---
+
+- name: Create the api config file directory
+  file: path={{ config_directory_path }}
+    mode=0775
+    state=directory
+
+- name: Copy the api env file
+  template: src=env.j2 dest={{ config_directory_path }}/.env
+
+- name: Run api
+  become: true
+  docker_container:
+    name: api
+    image: "{{ docker_image }}"
+    state: started
+    recreate: yes
+    restart_policy: on-failure
+    pull: yes
+    volumes:
+      - "{{ config_directory_path }}/env:{{ main_app_directory_path }}/.env}"
+    ports:
+      - 4000:4000

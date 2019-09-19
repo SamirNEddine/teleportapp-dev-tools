@@ -1,0 +1,31 @@
+---
+- name: Uninstall python2
+  apt:
+    name: ['python2.7-minimal', 'python2.7']
+    state: absent
+    purge: yes
+
+- name: Install python3 and some utility packages
+  apt:
+    name: ['python3-pycurl', 'python3-pip', 'python3-setuptools', 'htop', 'ncdu']
+    state: latest
+    update_cache: yes
+    install_recommends: no
+
+- name: Install pip and some Python modules
+  pip:
+    name: ['pip', 'docker']
+    state: latest
+
+- name: Uninstall old docker-py package
+  pip: name=docker-py state=absent
+
+- name: Install Docker
+  include_role:
+    name: docker
+
+- name: Remove dependencies that are no longer required
+  apt:
+    update_cache: yes
+    autoremove: yes
+    autoclean: yes

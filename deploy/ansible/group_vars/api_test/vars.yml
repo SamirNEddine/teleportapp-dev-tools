@@ -1,0 +1,35 @@
+---
+
+#ssh
+ansible_ssh_port: 22
+ansible_user: ''
+ansible_ssh_private_key_file: ~/.ssh/google_compute_engine
+
+#database
+db_base_url: 10.73.0.2
+db_port: 27017
+main_db_name: "{{ vault_main_db_name }}"
+db_username: "{{ vault_db_username }}"
+db_password: "{{ vault_db_password }}"
+
+#main server
+main_server_port: 4000
+
+#jwt
+jwt_secret: "{{ vault_jwt_secret }}"
+jwt_expiration: 72h
+
+#agora
+agora_app_id: "{{ vault_agora_app_id }}"
+agora_app_certificate: "{{ vault_agora_app_certificate }}"
+
+#opentalk
+open_tok_api_key: "{{ vault_open_tok_api_key }}"
+open_tok_api_secret: "{{ vault_open_tok_api_secret }}"
+
+#redis
+redis_port: 6379
+redis_host: 10.0.0.3
+
+#docker
+docker_image: eu.gcr.io/teleport-platform/api

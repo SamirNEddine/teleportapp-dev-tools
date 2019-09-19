@@ -1,0 +1,25 @@
+---
+
+- name: Uninstall old versions
+  apt:
+    name: ['docker', 'docker-engine', 'docker.io']
+    state: absent
+
+- name: Update cache and install packages to allow apt to use a repository over HTTPS
+  apt:
+    name: ['libcurl3-gnutls', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
+    state: latest
+    update_cache: yes
+
+- name: Add Docker official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Ensure docker registry is available
+  raw: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+- name: Update the apt package index and install Docker
+  apt:
+    name: docker-ce
+    update_cache: yes

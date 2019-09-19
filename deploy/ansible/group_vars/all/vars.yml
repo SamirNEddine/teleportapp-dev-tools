@@ -1,0 +1,4 @@
+---
+
+main_app_directory_path: "/usr/src/app"
+config_directory_path: "/etc/teleport"
