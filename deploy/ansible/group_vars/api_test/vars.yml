@@ -34,5 +34,9 @@ redis_host: 10.0.0.3
 #segment
 segment_key: "{{ vault_segment_key }}"
 
+#Sentry
+sentry_dsn: "{{ vault_sentry_dsn }}"
+
+
 #docker
 docker_image: eu.gcr.io/teleport-platform/api
