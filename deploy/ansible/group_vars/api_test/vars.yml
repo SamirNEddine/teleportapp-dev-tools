@@ -37,6 +37,8 @@ segment_key: "{{ vault_segment_key }}"
 #Sentry
 sentry_dsn: "{{ vault_sentry_dsn }}"
 
+#CORS
+cors_webapp_origin: https://test-webapp.tlprt.io
 
 #docker
 docker_image: eu.gcr.io/teleport-platform/api
