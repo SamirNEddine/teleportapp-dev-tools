@@ -40,5 +40,9 @@ sentry_dsn: "{{ vault_sentry_dsn }}"
 #CORS
 cors_webapp_origin: https://test-webapp.tlprt.io
 
+#voxeet
+voxeet_consumer_key: "{{ vault_voxeet_consumer_key }}"
+voxeet_consumer_secret: "{{ voxeet_consumer_secret }}"
+
 #docker
 docker_image: eu.gcr.io/teleport-platform/api
