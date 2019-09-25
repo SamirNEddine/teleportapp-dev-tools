@@ -17,7 +17,7 @@ main_server_port: 4000
 
 #jwt
 jwt_secret: "{{ vault_jwt_secret }}"
-jwt_expiration: 72h
+jwt_expiration: 720h
 
 #agora
 agora_app_id: "{{ vault_agora_app_id }}"
