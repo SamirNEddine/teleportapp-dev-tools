@@ -31,10 +31,12 @@ services:
       - 4000:4000
       - 49541:49541 #For debugging
     environment:
-      NODE_ENV: development
+      NODE_ENV: dev
       WAIT_HOSTS: mongo:27017
+      GOOGLE_APPLICATION_CREDENTIALS: /etc/Teleport/gcp.json
     volumes:
       - "${PATH_TO_API_FOLDER}:/usr/src/app"
+      - "${PATH_TO_GCP_SERVICE_ACCOUNT_CREDENTIALS}:/etc/Teleport/gcp.json"
       - /usr/src/app/node_modules
     depends_on:
       - mongo
