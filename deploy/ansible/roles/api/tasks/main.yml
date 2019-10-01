@@ -11,6 +11,9 @@
 - name: Copy the gCloud credentials file
   template: src=gcloud.json.j2 dest={{ config_directory_path }}/gcp.json
 
+- name: Copy the update contacts scores job script
+  template: src=contacts-scores-job.sh.j2 dest=~/contacts-scores-job.sh
+
 - name: Run api
   become: true
   docker_container:
@@ -21,10 +24,17 @@
     restart_policy: on-failure
     pull: yes
     env:
-      NODE_ENV: test
+      NODE_ENV: "{{ node_env }}"
       GOOGLE_APPLICATION_CREDENTIALS: /etc/Teleport/gcp.json
     volumes:
       - "{{ config_directory_path }}/env.ini:{{ main_app_directory_path }}/.env"
       - "{{ config_directory_path }}/gcp.json:/etc/Teleport/gcp.json"
     ports:
       - 4000:4000
+
+- name: Schedule update contact scores job
+  cron:
+    name: "Update contact scores"
+    minute: "0"
+    hour: "5"
+    job: "sh ~/contacts-scores-job.sh > ~/contacts-scores-job.log 2>&1"

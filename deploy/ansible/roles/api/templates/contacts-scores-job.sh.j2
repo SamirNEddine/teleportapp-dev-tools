@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "=================================="
+date "+%H:%M:%S  %d/%m/%y"
+echo "Running Update Contacts Scores job"
+echo "=================================="
+docker run --name score_cronjob -e NODE_ENV="{{ node_env }}" -e GOOGLE_APPLICATION_CREDENTIAL="/etc/Teleport/gcp.json" -v "{{ config_directory_path }}"/env.ini:/usr/src/app/.env -v /etc/teleport/gcp.json":"/etc/Teleport/gcp.json "{{ docker_image }}" node cron_jobs/contacts_scores.js
+docker system prune -f
