@@ -1,0 +1,7 @@
+---
+
+#nginx
+server_name: test.tlprt.io
+
+#docker
+docker_image: eu.gcr.io/teleport-platform/website
