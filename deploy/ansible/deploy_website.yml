@@ -1,0 +1,11 @@
+---
+
+#Deploy
+- name: Deploy website
+  hosts: "website_test"
+  gather_facts: True
+  roles:
+    - role: common
+      become: true
+    - role: website
+      become: true
