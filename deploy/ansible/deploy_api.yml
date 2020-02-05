@@ -2,10 +2,10 @@
 
 #Deploy
 - name: Deploy API
-  hosts: "api_test"
+  hosts: "api-legacy_test"
   gather_facts: True
   roles:
     - role: common
       become: true
-    - role: api
+    - role: api-legacy
       become: true
