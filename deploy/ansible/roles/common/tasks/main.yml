@@ -7,7 +7,7 @@
 
 - name: Install python3 and some utility packages
   apt:
-    name: ['python3-pycurl', 'python3-pip', 'python3-setuptools', 'htop', 'ncdu']
+    name: ['python3-pycurl', 'python3-pip', 'python3-setuptools', 'cron', 'htop', 'ncdu']
     state: latest
     update_cache: yes
     install_recommends: no
@@ -29,3 +29,6 @@
     update_cache: yes
     autoremove: yes
     autoclean: yes
+
+- name: Configure gcloud
+  shell: curl -fsSL "https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v1.5.0/docker-credential-gcr_linux_amd64-1.5.0.tar.gz" | tar xz --to-stdout ./docker-credential-gcr > /usr/bin/docker-credential-gcr && chmod +x /usr/bin/docker-credential-gcr && docker-credential-gcr configure-docker

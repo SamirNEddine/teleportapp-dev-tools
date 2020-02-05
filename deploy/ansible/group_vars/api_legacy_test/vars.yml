@@ -48,10 +48,10 @@ voxeet_consumer_key: "{{ vault_voxeet_consumer_key }}"
 voxeet_consumer_secret: "{{ voxeet_consumer_secret }}"
 
 #BigQuery
-bigquery_analytics_dataset_name: api_test
+bigquery_analytics_dataset_name: api-legacy_test
 
 #docker
-docker_image: eu.gcr.io/teleport-platform/api
+docker_image: eu.gcr.io/teleport-platform/api-legacy
 
 #google cloud credentials
 gcloud_credentials_type: "{{ vault_gcloud_credentials_type }}"
@@ -64,3 +64,10 @@ gcloud_credentials_auth_uri: "{{ vault_gcloud_credentials_auth_uri }}"
 gcloud_credentials_token_uri: "{{ vault_gcloud_credentials_token_uri }}"
 gcloud_credentials_auth_provider_x509_cert_url: "{{ vault_gcloud_credentials_auth_provider_x509_cert_url }}"
 gcloud_credentials_client_x509_cert_url: "{{ vault_gcloud_credentials_client_x509_cert_url }}"
+
+#cerftbot
+certbot_domains:
+  - test-api-legacy.tlprt.io
+
+#nginx
+nginx_api_server_name: test-api-legacy.tlprt.io
