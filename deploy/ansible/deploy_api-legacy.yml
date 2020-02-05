@@ -2,7 +2,7 @@
 
 #Deploy
 - name: Deploy API
-  hosts: "api-legacy_test"
+  hosts: "api_legacy_test"
   gather_facts: True
   roles:
     - role: common
