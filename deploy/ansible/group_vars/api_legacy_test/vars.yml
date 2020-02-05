@@ -48,7 +48,7 @@ voxeet_consumer_key: "{{ vault_voxeet_consumer_key }}"
 voxeet_consumer_secret: "{{ voxeet_consumer_secret }}"
 
 #BigQuery
-bigquery_analytics_dataset_name: api_test_legacy
+bigquery_analytics_dataset_name: api_test
 
 #docker
 docker_image: eu.gcr.io/teleport-platform/api-legacy
