@@ -7,5 +7,7 @@
   roles:
     - role: common
       become: true
+    - role: cerftbot
+      become: true
     - role: api-legacy
       become: true

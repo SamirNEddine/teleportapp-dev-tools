@@ -1,0 +1,52 @@
+---
+- name: Check if certificate already exists.
+  stat:
+    path: /etc/letsencrypt/live/{{ certbot_domains | first | replace('*.', '') }}/cert.pem
+  register: already_generated
+
+- name: Install software-properties-common
+  apt:
+    name: ['software-properties-common']
+    state: latest
+    update_cache: yes
+    install_recommends: no
+  when: not already_generated.stat.exists
+
+- name: add-apt-repository universe
+  shell: add-apt-repository universe
+  when: not already_generated.stat.exists
+
+- name: add-apt-repository ppa:certbot/certbot
+  apt_repository:
+    repo: ppa:certbot/certbot
+  when: not already_generated.stat.exists
+
+- name: Install Certbot
+  apt:
+    name: ['certbot', 'python-certbot-nginx']
+    state: latest
+    update_cache: yes
+    install_recommends: no
+  when: not already_generated.stat.exists
+
+- name: Make sure nginx is intalled
+  apt: name=nginx state=latest
+  when: not already_generated.stat.exists
+
+- name: Make sure nginx is started
+  service:
+    name: nginx
+    state: started
+  when: not already_generated.stat.exists
+
+- name: Generate new certificate if one doesn't exist.
+  command: >-
+    certbot certonly --nginx --noninteractive --agree-tos
+    --email {{ certbot_admin_email }}
+    -d {{ certbot_domains | join(',') }}
+  when: not already_generated.stat.exists
+
+#- name: Start nginx again after generating certificate
+#  service:
+#    name: nginx
+#    state: started
